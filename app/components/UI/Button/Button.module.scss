@@ -1,0 +1,23 @@
+button {
+    padding: 0.5rem 1rem;
+    background-color: $bg-primary-button;
+    color: $color-button-text;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+
+    &:active,
+    &:hover {
+        background-color: $bg-primary-button-active;
+        color: $color-button-text-active;
+    }
+
+    &:disabled {
+        background-color: $bg-primary-button-active;
+        color: $color-button-text-active;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
