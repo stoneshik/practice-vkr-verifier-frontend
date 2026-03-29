@@ -1,0 +1,23 @@
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #e9ecef;
+    color: #495057;
+
+    &:hover:not(:disabled) {
+        background-color: #dee2e6;
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}

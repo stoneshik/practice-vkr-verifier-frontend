@@ -7,6 +7,7 @@ import { ReportStatusDictionary } from '~/types/ReportStatus';
 import type { VerificationReport } from '~/types/VerificationReport';
 import { baseURL } from '~/utils/lib/axios';
 import './ReportUploadForm.scss';
+import { CopyButton } from '~/components/UI/CopyButton/CopyButton';
 
 interface UploadProgress {
     loaded: number;
@@ -296,7 +297,7 @@ export function ReportUploadForm(): JSX.Element {
                 <h2>Загруженный отчёт</h2>
                 <div className="format-hint">
                     <ul>
-                        <li>id: <Link to={`/reports/${verificationReport.id}`}>{verificationReport.id}</Link></li>
+                        <li>id: <Link to={`/reports/${verificationReport.id}`}>{verificationReport.id}</Link> <CopyButton text={verificationReport.id}/></li>
                         <li>Статус: {ReportStatusDictionary[verificationReport.reportStatus]}</li>
                         <li>Время загрузки отчёта: {verificationReport.createdAt}</li>
                     </ul>

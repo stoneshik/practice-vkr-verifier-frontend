@@ -2,7 +2,7 @@ import { isErrorMessage } from "~/types/ErrorMessage";
 import type { VerificationReport } from "~/types/VerificationReport";
 import { api } from "~/utils/lib/axios";
 
-export interface ParamsForGetReportId { id: number; }
+export interface ParamsForGetReportId { id: string; }
 
 export const getReportById = async ({ id }: ParamsForGetReportId): Promise<VerificationReport> => {
     try {
