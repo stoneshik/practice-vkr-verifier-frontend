@@ -2,17 +2,20 @@ import { useCallback, useEffect, useState, type JSX } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { getReportById, type ParamsForGetReportId } from "~/api/Flat/GetReportById";
-import { Header } from "~/components/Header/Header";
-import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
-import type { VerificationReport } from "~/types/VerificationReport";
-import styles from "./ReportByIdPage.module.scss";
-import { ReportStatusDictionary } from "~/types/ReportStatus";
+import { ReportJsonTable } from "~/components/Tables/Report/ReportJsonTable/ReportJsonTable";
+import { RulesTable } from "~/components/Tables/Report/RulesTable/RulesTable";
 import { CopyButton } from "~/components/UI/CopyButton/CopyButton";
+import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
+import type { JsonReport } from "~/types/JsonReport/JsonReport";
+import { ReportStatusDictionary } from "~/types/ReportStatus";
+import type { VerificationReport } from "~/types/VerificationReport";
 import { baseURL } from "~/utils/lib/axios";
+import styles from "./ReportByIdPage.module.scss";
 
 export default function ReportByIdPage(): JSX.Element {
     const { id } = useParams<{ id: string }>();
     const [report, setReport] = useState<VerificationReport | null>(null);
+    const [jsonReport, setJsonReport] = useState<JsonReport | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>("");
 
     const load = useCallback(
@@ -20,8 +23,10 @@ export default function ReportByIdPage(): JSX.Element {
             try {
                 const data = await getReportById(params);
                 setReport(data);
+                if (data.reportJson) {
+                    setJsonReport(JSON.parse(data.reportJson));
+                }
                 setErrorMessage("");
-                console.log(data);
             } catch (error) {
                 if (isErrorMessage(error)) {
                     const message = createMessageStringFromErrorMessage(error);
@@ -58,11 +63,17 @@ export default function ReportByIdPage(): JSX.Element {
                     <li><b>Статус:</b> {ReportStatusDictionary[report.reportStatus]}</li>
                     <li><b>Время загрузки отчёта:</b> {report.createdAt}</li>
                 </ul>
-                <a href={`${baseURL}/reports/${report.id}/json`} target="_blank" rel="noopener noreferrer">
+                <a href={`${baseURL}/reports/${report.id}/json`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.jsonReport}>
                     Открыть полный json отчёт
                 </a>
                 </>
             }
+            {!report && <h2>Отчет по проверке не сформирован</h2>}
+            {jsonReport && <ReportJsonTable jsonReport={jsonReport}/>}
+            <RulesTable/>
         </div>
     );
 }

@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState, type JSX } from "react";
 
 import { getReportsPage, type ParamsForGetReportsPage } from "~/api/Flat/GetReportsPage";
-import { ReportTable } from "~/components/Tables/Flat/FlatTable/ReportTable";
+import { ReportUploadForm } from "~/components/Forms/ReportUploadForm/ReportUploadForm";
+import { ReportTable } from "~/components/Tables/Report/ReportTable/ReportTable";
 import { Button } from "~/components/UI/Button/Button";
 import { createMessageStringFromErrorMessage, isErrorMessage } from "~/types/ErrorMessage";
 import type { ReportsPage } from "~/types/ReportsPage";
 import styles from "./HomePage.module.scss";
-import { ReportUploadForm } from "~/components/Forms/ReportUploadForm/ReportUploadForm";
 
 export default function HomePage(): JSX.Element {
     const [reportsPage, setReportsPage] = useState<ReportsPage | null>(null);
@@ -97,15 +97,12 @@ export default function HomePage(): JSX.Element {
                     ))}
                 </select>
             </div>
-
             {reports && <ReportTable reports={reports} />}
-
             <div className={styles.pagination}>
                 <Button onClick={handlePrevPage} textButton={"Назад"} disabled={page <= 0}/>
                 <span>Страница {page + 1} из {totalPages}</span>
                 <Button onClick={handleNextPage} textButton={"Вперед"} disabled={page >= totalPages - 1}/>
             </div>
-
             <ReportUploadForm />
         </div>
         </>

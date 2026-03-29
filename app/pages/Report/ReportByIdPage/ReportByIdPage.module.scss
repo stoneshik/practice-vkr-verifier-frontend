@@ -18,6 +18,20 @@ $border_color: #ccc;
         margin-bottom: 1rem;
     }
 
+    .jsonReport {
+        color: $bg-dark;
+        text-decoration: underline;
+        margin-bottom: 26px;
+    }
+    .jsonReport:hover {
+        color: $brand;
+        text-decoration: none;
+    }
+
+    a {
+        color: #0e82b8;
+    }
+
     input {
         padding: 0.5rem;
         border: 1px solid $border_color;
