@@ -259,7 +259,7 @@ export function ReportUploadForm(): JSX.Element {
                         <span className="spinner"></span>
                         Шаблон ВКР загружается...
                         </>
-                    ) : 'Загрузить файл'}
+                    ) : 'Отправить файл на проверку'}
                     </button>
                 </div>
             </form>
