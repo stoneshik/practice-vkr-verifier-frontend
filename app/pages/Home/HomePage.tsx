@@ -47,7 +47,7 @@ export default function HomePage(): JSX.Element {
             }
         };
         fetchData();
-        intervalId = setInterval(fetchData, 10_000);
+        intervalId = setInterval(fetchData, 3_000);
         return () => {
             mounted = false;
             clearInterval(intervalId);
